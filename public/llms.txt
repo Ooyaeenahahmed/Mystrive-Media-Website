@@ -1,0 +1,14 @@
+# MyStrive Media
+
+> MyStrive Media builds 24/7 AI phone receptionists for home service contractors (roofing, HVAC, plumbing, electrical, remodeling) and restaurants. The AI receptionist, named Casey, answers every call, qualifies the lead, and books the appointment directly onto the business's calendar — including nights, weekends, and holidays.
+
+## Key facts
+- Product: AI voice receptionist named "Casey"
+- Built on Retell AI voice technology
+- Target customers: home service contractors and restaurants in the US
+- Phone number for live demo: +1 (972) 619-6620
+- Booking: https://cal.com/ooyaeenah-ahmed/30-min-consultation
+- Founder: Ooyaeenah Ahmed
+
+## Pages
+- Home: https://mystrivemedia.com/ — overview, features, pricing consultation, FAQ, live demo call, testimonials

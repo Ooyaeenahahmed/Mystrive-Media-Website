@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mystrivemedia.com/sitemap.xml
