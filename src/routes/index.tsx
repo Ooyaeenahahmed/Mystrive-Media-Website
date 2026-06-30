@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Phone, Clock, CalendarCheck, Cog, ShieldCheck, ExternalLink, Linkedin, Instagram, Facebook } from "lucide-react";
+import { ArrowRight, Phone, Clock, CalendarCheck, Cog, ShieldCheck, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Nav } from "@/components/landing/Nav";
 import { CallCard } from "@/components/landing/CallCard";
 import { Reveal } from "@/components/landing/Reveal";
@@ -236,17 +236,6 @@ function Home() {
           <Reveal delay={0.1}>
             <CalEmbed />
           </Reveal>
-          <p className="mt-6 text-center text-sm text-muted-foreground">
-            Having trouble loading the calendar?{" "}
-            <a
-              href={CAL}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-teal hover:underline inline-flex items-center gap-1"
-            >
-              Open the booking page directly <ExternalLink className="size-3.5" />
-            </a>
-          </p>
         </div>
       </section>
 
