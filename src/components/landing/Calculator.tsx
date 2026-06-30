@@ -22,14 +22,29 @@ export function Calculator() {
       <div className="grid lg:grid-cols-2 gap-10">
         {/* Inputs */}
         <div className="space-y-7">
-          <NumberInput label="Calls per month" value={calls} onChange={setCalls} min={0} />
+          <SliderInput
+            label="Calls per month"
+            value={calls}
+            onChange={setCalls}
+            min={10}
+            max={1000}
+            step={10}
+          />
           <SliderInput
             label="% of calls missed or unanswered"
             value={missedPct}
             onChange={setMissedPct}
             suffix="%"
           />
-          <NumberInput label="Average job value" value={jobValue} onChange={setJobValue} prefix="$" min={0} />
+          <SliderInput
+            label="Average job value"
+            value={jobValue}
+            onChange={setJobValue}
+            min={150}
+            max={60000}
+            step={150}
+            formatValue={(v) => fmt(v)}
+          />
           <SliderInput
             label="Close rate on answered calls"
             value={closeRate}
@@ -79,56 +94,38 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
-function NumberInput({
-  label, value, onChange, prefix, min,
-}: { label: string; value: number; onChange: (n: number) => void; prefix?: string; min?: number }) {
-  return (
-    <label className="block">
-      <span className="block text-sm font-medium text-foreground mb-2">{label}</span>
-      <div className="relative">
-        {prefix && (
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-mono">
-            {prefix}
-          </span>
-        )}
-        <input
-          type="number"
-          inputMode="numeric"
-          value={value}
-          min={min}
-          onChange={(e) => onChange(Math.max(min ?? 0, Number(e.target.value) || 0))}
-          className={`w-full h-12 rounded-xl bg-background border border-input text-foreground font-mono text-lg tabular-nums focus:border-teal focus:ring-0 focus:outline-none transition ${
-            prefix ? "pl-9 pr-4" : "px-4"
-          }`}
-        />
-      </div>
-    </label>
-  );
-}
-
 function SliderInput({
-  label, value, onChange, suffix,
-}: { label: string; value: number; onChange: (n: number) => void; suffix?: string }) {
+  label, value, onChange, min = 0, max = 100, step = 1, suffix, formatValue,
+}: {
+  label: string;
+  value: number;
+  onChange: (n: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
+  suffix?: string;
+  formatValue?: (n: number) => string;
+}) {
+  const pct = ((value - min) / (max - min)) * 100;
+  const display = formatValue ? formatValue(value) : `${value}${suffix ?? ""}`;
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
         <span className="text-sm font-medium text-foreground">{label}</span>
-        <span className="font-mono text-teal tabular-nums">
-          {value}
-          {suffix}
-        </span>
+        <span className="font-mono text-teal tabular-nums">{display}</span>
       </div>
       <input
         type="range"
-        min={0}
-        max={100}
+        min={min}
+        max={max}
+        step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         aria-label={label}
-        aria-valuetext={`${value}${suffix ?? ""}`}
+        aria-valuetext={display}
         className="w-full accent-teal h-2"
         style={{
-          background: `linear-gradient(to right, #16C6C6 ${value}%, rgba(147,161,176,0.18) ${value}%)`,
+          background: `linear-gradient(to right, #16C6C6 ${pct}%, rgba(147,161,176,0.18) ${pct}%)`,
           borderRadius: 999,
           appearance: "none",
           WebkitAppearance: "none",
@@ -138,3 +135,4 @@ function SliderInput({
     </div>
   );
 }
+
